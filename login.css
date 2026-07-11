@@ -1,0 +1,486 @@
+/* ======= CSS RESET & VARIABLES ======= */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg-start: #c9e8f7;
+  --bg-mid:   #a8d8f0;
+  --bg-end:   #daf0fb;
+  --card-bg:  rgba(255, 255, 255, 0.55);
+  --border:   rgba(255, 255, 255, 0.75);
+  --shadow:   rgba(100, 180, 230, 0.25);
+  --primary:  #1a8fc1;
+  --primary-hover: #1278a8;
+  --accent:   #5bc4ef;
+  --text-dark: #0d3d5c;
+  --text-mid:  #2a6f9a;
+  --text-light: #7dbee0;
+  --input-bg: rgba(255,255,255,0.7);
+  --input-border: rgba(91,196,239,0.5);
+  --error:    #e05b5b;
+  --success:  #2ebf91;
+}
+
+/* ======= BODY & BACKGROUND ======= */
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--bg-start) 0%, var(--bg-mid) 50%, var(--bg-end) 100%);
+  font-family: 'Poppins', sans-serif;
+  overflow: hidden;
+  position: relative;
+}
+
+/* ======= ANIMATED BUBBLES ======= */
+.bubbles {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.bubble {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.6), rgba(91,196,239,0.15));
+  border: 1px solid rgba(255,255,255,0.5);
+  animation: floatUp linear infinite;
+}
+
+.bubble:nth-child(1)  { width:60px;  height:60px;  left:5%;   bottom:-80px; animation-duration:12s; animation-delay:0s;  }
+.bubble:nth-child(2)  { width:40px;  height:40px;  left:15%;  bottom:-80px; animation-duration:9s;  animation-delay:2s;  }
+.bubble:nth-child(3)  { width:90px;  height:90px;  left:30%;  bottom:-80px; animation-duration:14s; animation-delay:1s;  }
+.bubble:nth-child(4)  { width:25px;  height:25px;  left:50%;  bottom:-80px; animation-duration:8s;  animation-delay:3s;  }
+.bubble:nth-child(5)  { width:70px;  height:70px;  left:65%;  bottom:-80px; animation-duration:11s; animation-delay:0.5s;}
+.bubble:nth-child(6)  { width:35px;  height:35px;  left:78%;  bottom:-80px; animation-duration:10s; animation-delay:4s;  }
+.bubble:nth-child(7)  { width:50px;  height:50px;  left:88%;  bottom:-80px; animation-duration:13s; animation-delay:1.5s;}
+.bubble:nth-child(8)  { width:20px;  height:20px;  left:42%;  bottom:-80px; animation-duration:7s;  animation-delay:5s;  }
+.bubble:nth-child(9)  { width:80px;  height:80px;  left:22%;  bottom:-80px; animation-duration:15s; animation-delay:2.5s;}
+.bubble:nth-child(10) { width:45px;  height:45px;  left:72%;  bottom:-80px; animation-duration:9s;  animation-delay:6s;  }
+
+@keyframes floatUp {
+  0%   { transform: translateY(0) scale(1);   opacity: 0;   }
+  10%  { opacity: 1; }
+  90%  { opacity: 0.6; }
+  100% { transform: translateY(-110vh) scale(1.1); opacity: 0; }
+}
+
+/* ======= CARD ======= */
+.card-wrapper {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 440px;
+  padding: 16px;
+}
+
+.card {
+  background: var(--card-bg);
+  backdrop-filter: blur(22px) saturate(180%);
+  -webkit-backdrop-filter: blur(22px) saturate(180%);
+  border: 1.5px solid var(--border);
+  border-radius: 28px;
+  padding: 48px 44px 44px;
+  box-shadow:
+    0 8px 40px var(--shadow),
+    0 2px 8px rgba(255,255,255,0.4) inset;
+  animation: cardIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(40px) scale(0.96); }
+  to   { opacity: 1; transform: translateY(0)    scale(1);    }
+}
+
+/* ======= LOGO / BRAND ======= */
+.logo-ring {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #5bc4ef, #1a8fc1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 18px;
+  box-shadow: 0 6px 24px rgba(26,143,193,0.4);
+  animation: pulse 3s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 6px 24px rgba(26,143,193,0.4); }
+  50%       { box-shadow: 0 6px 36px rgba(26,143,193,0.65); }
+}
+
+.logo-ring svg {
+  width: 30px;
+  height: 30px;
+  fill: white;
+}
+
+/* ======= HEADING — Playfair Display ======= */
+.card-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  text-align: center;
+  line-height: 1.2;
+  margin-bottom: 4px;
+  letter-spacing: -0.5px;
+}
+
+/* ======= SUBTITLE — Dancing Script ======= */
+.card-subtitle {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-light);
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+/* ======= LABELS — Raleway ======= */
+.field-label {
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-mid);
+  margin-bottom: 7px;
+  display: block;
+}
+
+/* ======= INPUT GROUP ======= */
+.field {
+  margin-bottom: 20px;
+}
+
+.input-wrap {
+  position: relative;
+}
+
+.input-wrap .icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-light);
+  font-size: 16px;
+  pointer-events: none;
+  transition: color 0.25s;
+}
+
+/* ======= INPUTS — Space Grotesk ======= */
+.field-input {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 400;
+  width: 100%;
+  padding: 13px 44px 13px 42px;
+  background: var(--input-bg);
+  border: 1.5px solid var(--input-border);
+  border-radius: 14px;
+  color: var(--text-dark);
+  outline: none;
+  transition: border-color 0.25s, box-shadow 0.25s, background 0.25s;
+}
+
+.field-input::placeholder {
+  color: #b0d8ee;
+}
+
+.field-input:focus {
+  border-color: var(--accent);
+  background: rgba(255,255,255,0.9);
+  box-shadow: 0 0 0 4px rgba(91,196,239,0.2);
+}
+
+.field-input:focus + .icon,
+.input-wrap:focus-within .icon {
+  color: var(--primary);
+}
+
+.toggle-pass {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: var(--text-light);
+  font-size: 15px;
+  transition: color 0.2s;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.toggle-pass:hover { color: var(--primary); }
+
+/* ======= OPTIONS ROW ======= */
+.options-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
+}
+
+/* Remember me — Caveat font */
+.remember {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  cursor: pointer;
+  font-family: 'Caveat', cursive;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-mid);
+}
+
+.remember input[type="checkbox"] {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--input-border);
+  border-radius: 5px;
+  background: var(--input-bg);
+  cursor: pointer;
+  position: relative;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.remember input[type="checkbox"]:checked {
+  background: var(--primary);
+  border-color: var(--primary);
+}
+
+.remember input[type="checkbox"]:checked::after {
+  content: '';
+  position: absolute;
+  left: 4px; top: 1px;
+  width: 7px; height: 12px;
+  border: 2px solid white;
+  border-top: none; border-left: none;
+  transform: rotate(40deg);
+}
+
+/* Forgot — Poppins */
+.forgot-link {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--primary);
+  text-decoration: none;
+  transition: color 0.2s, text-decoration 0.2s;
+}
+
+.forgot-link:hover {
+  color: var(--primary-hover);
+  text-decoration: underline;
+}
+
+/* ======= ERROR MSG ======= */
+.error-msg {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.78rem;
+  color: var(--error);
+  margin-top: 5px;
+  display: none;
+  animation: shake 0.4s;
+}
+
+.error-msg.visible { display: block; }
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25%       { transform: translateX(-6px); }
+  75%       { transform: translateX(6px); }
+}
+
+/* ======= SUBMIT BUTTON ======= */
+.btn-login {
+  font-family: 'Raleway', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  width: 100%;
+  padding: 15px;
+  border: none;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #5bc4ef 0%, #1a8fc1 100%);
+  color: white;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 6px 24px rgba(26,143,193,0.38);
+}
+
+.btn-login::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.btn-login:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 32px rgba(26,143,193,0.5);
+}
+
+.btn-login:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 16px rgba(26,143,193,0.3);
+}
+
+.btn-login.loading .btn-text { opacity: 0; }
+.btn-login .spinner {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.btn-login.loading .spinner { opacity: 1; }
+
+.spinner-ring {
+  width: 22px; height: 22px;
+  border: 3px solid rgba(255,255,255,0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ======= SUCCESS OVERLAY ======= */
+.success-overlay {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 20px 0 10px;
+}
+
+.success-overlay.visible { display: flex; }
+.success-overlay .checkmark {
+  width: 64px; height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #2ebf91, #1a9f75);
+  display: flex; align-items: center; justify-content: center;
+  animation: popIn 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes popIn {
+  from { transform: scale(0); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+
+.success-overlay .checkmark svg {
+  width: 32px; height: 32px; stroke: white; fill: none;
+  stroke-width: 3; stroke-linecap: round; stroke-linejoin: round;
+}
+
+.success-overlay p {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  color: var(--text-dark);
+}
+
+.success-overlay small {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.82rem;
+  color: var(--text-light);
+}
+
+/* ======= DIVIDER ======= */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 24px 0;
+}
+
+.divider span {
+  font-family: 'Caveat', cursive;
+  font-size: 0.9rem;
+  color: var(--text-light);
+  white-space: nowrap;
+}
+
+.divider::before, .divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(91,196,239,0.4), transparent);
+}
+
+/* ======= SOCIAL BUTTONS ======= */
+.social-row {
+  display: flex;
+  gap: 12px;
+}
+
+.social-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px;
+  border: 1.5px solid var(--input-border);
+  border-radius: 12px;
+  background: var(--input-bg);
+  cursor: pointer;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text-mid);
+  transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
+  text-decoration: none;
+}
+
+.social-btn:hover {
+  background: rgba(255,255,255,0.9);
+  border-color: var(--accent);
+  box-shadow: 0 4px 16px rgba(91,196,239,0.2);
+}
+
+.social-btn svg {
+  width: 18px; height: 18px;
+}
+
+/* ======= SIGNUP LINK ======= */
+.signup-text {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.82rem;
+  color: var(--text-light);
+  text-align: center;
+  margin-top: 24px;
+}
+
+.signup-text a {
+  font-weight: 600;
+  color: var(--primary);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.signup-text a:hover { color: var(--primary-hover); }
+
+/* ======= RESPONSIVE ======= */
+@media (max-width: 480px) {
+  .card { padding: 36px 24px 32px; }
+  .card-title { font-size: 1.7rem; }
+}

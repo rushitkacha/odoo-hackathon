@@ -5,7 +5,7 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 // ── Error helper ─────────────────────────────────────────────
 function setError(wrapId, errId, show, msg) {
   const wrap = $(wrapId);
-  const err  = $(errId);
+  const err = $(errId);
   if (show) {
     if (wrap) wrap.classList.add('error');
     err.classList.add('visible');
@@ -19,7 +19,7 @@ function setError(wrapId, errId, show, msg) {
 // ── Password strength ─────────────────────────────────────────
 function calcStrength(pw) {
   let score = 0;
-  if (pw.length >= 8)  score++;
+  if (pw.length >= 8) score++;
   if (pw.length >= 12) score++;
   if (/[A-Z]/.test(pw)) score++;
   if (/[0-9]/.test(pw)) score++;
@@ -28,13 +28,13 @@ function calcStrength(pw) {
 }
 
 function updateStrength(pw) {
-  const bar   = $('strengthBar');
+  const bar = $('strengthBar');
   const label = $('strengthLabel');
   if (!pw) {
-    bar.style.width      = '0%';
+    bar.style.width = '0%';
     bar.style.background = '';
-    label.textContent    = '';
-    label.style.color    = '';
+    label.textContent = '';
+    label.style.color = '';
     return;
   }
   const score = calcStrength(pw);
@@ -46,25 +46,25 @@ function updateStrength(pw) {
     { pct: '100%', color: '#00C4CC', text: 'Very strong' },
   ];
   const lvl = levels[Math.max(0, score - 1)] || levels[0];
-  bar.style.width      = lvl.pct;
+  bar.style.width = lvl.pct;
   bar.style.background = lvl.color;
-  label.textContent    = lvl.text;
-  label.style.color    = lvl.color;
+  label.textContent = lvl.text;
+  label.style.color = lvl.color;
 }
 
 // ── Eye toggles ───────────────────────────────────────────────
 function initEyeToggle(toggleId, inputId, openId, closedId) {
   $(toggleId).addEventListener('click', () => {
-    const pw   = $(inputId);
+    const pw = $(inputId);
     const show = pw.type === 'password';
     pw.type = show ? 'text' : 'password';
-    $(openId).style.display   = show ? 'none' : '';
-    $(closedId).style.display = show ? ''     : 'none';
+    $(openId).style.display = show ? 'none' : '';
+    $(closedId).style.display = show ? '' : 'none';
     $(toggleId).setAttribute('aria-label', show ? 'Hide password' : 'Show password');
   });
 }
 
-initEyeToggle('eyeToggle',  'password',        'eyeOpen',  'eyeClosed');
+initEyeToggle('eyeToggle', 'password', 'eyeOpen', 'eyeClosed');
 initEyeToggle('eyeToggle2', 'confirmPassword', 'eyeOpen2', 'eyeClosed2');
 
 // ── Live validation ───────────────────────────────────────────
@@ -111,11 +111,11 @@ $('signupForm').addEventListener('submit', async e => {
   e.preventDefault();
 
   const firstName = $('firstName').value.trim();
-  const lastName  = $('lastName').value.trim();
-  const email     = $('email').value.trim();
-  const password  = $('password').value;
-  const confirm   = $('confirmPassword').value;
-  const agreed    = $('agreeTerms').checked;
+  const lastName = $('lastName').value.trim();
+  const email = $('email').value.trim();
+  const password = $('password').value;
+  const confirm = $('confirmPassword').value;
+  const agreed = $('agreeTerms').checked;
   let valid = true;
 
   if (!firstName) {
@@ -158,7 +158,7 @@ $('signupForm').addEventListener('submit', async e => {
   // Show success overlay
   btn.classList.remove('loading');
   $('signupForm').style.display = 'none';
-  $('loginRow').style.display   = 'none';
+  $('loginRow').style.display = 'none';
   $('successOverlay').style.display = 'flex';
 
   // Redirect to login after 2s
